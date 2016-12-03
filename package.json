@@ -1,0 +1,14 @@
+{
+  "name": "xmasdojo",
+  "version": "0.0.1",
+  "description": "A small package for helping control a Raspberry Pi Sense HAT from node-red.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "*"
+  }
+}

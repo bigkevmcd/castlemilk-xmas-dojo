@@ -1,3 +1,9 @@
+/*!
+ * xmasdojo <https://github.com/bigkevmcd/castlemilk-xmas-dojo>
+ *
+ * Copyright (c) 2016 Kevin McDermott.
+ * Licensed under the MIT License.
+ */
 var assert = require('assert');
 var xmasdojo = require('xmasdojo');
 
@@ -30,9 +36,11 @@ describe('#gridToCommand()', function() {
     assert.equal('0,0,red,0,7,#00ff00,7,0,0,0,255,7,7,yellow', xmasdojo.gridToCommand(fourCorners, {flip: 'testing'}));
   });
 
-  it('both flip and dim the display if provided', function() {
-    assert.equal("D0\nRH\n0,0,red,0,7,#00ff00,7,0,0,0,255,7,7,yellow", xmasdojo.gridToCommand(fourCorners, {flip: 'horizontal', brightness: 0}));
+  it('should both flip and dim the display if provided', function() {
+    assert.equal('D0\nRH\n0,0,red,0,7,#00ff00,7,0,0,0,255,7,7,yellow', xmasdojo.gridToCommand(fourCorners, {flip: 'horizontal', brightness: 0}));
   });
 
-
+  it('should only output the specified row count', function() {
+    assert.equal('0,0,red,0,7,#00ff00', xmasdojo.gridToCommand(fourCorners, {rows: 1}));
+  });
 });

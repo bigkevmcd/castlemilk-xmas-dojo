@@ -1,5 +1,5 @@
 /*!
- * xmasdojo <https://github.com/bigkevmcd/xmasdojo>
+ * xmasdojo <https://github.com/bigkevmcd/castlemilk-xmas-dojo>
  *
  * Copyright (c) 2016 Kevin McDermott.
  * Licensed under the MIT License.
@@ -7,8 +7,14 @@
 'use strict';
 
 module.exports.gridToCommand = function(array, opts) {
-  var grid = [].concat.apply([], array.map(lineToCommand));
-  return (optsToCommands(opts || {}) + grid.join()).trim();
+  var opts = opts || {};
+  var grid = [].concat.apply([], array.filter(function(row, index) {
+    if (opts.hasOwnProperty('rows')) {
+      return index <= opts.rows;
+    }
+    return true;
+  }).map(lineToCommand));
+  return (optsToCommands(opts) + grid.join()).trim();
 };
 
 var optsToCommands = function(opts) {

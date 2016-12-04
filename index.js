@@ -6,9 +6,25 @@
  */
 'use strict';
 
-module.exports.gridToCommand = function(array) {
-  var merged = [].concat.apply([], array.map(lineToCommand));
-  return merged.join();
+module.exports.gridToCommand = function(array, opts) {
+  var grid = [].concat.apply([], array.map(lineToCommand));
+  return (optsToCommands(opts || {}) + grid.join()).trim();
+};
+
+var optsToCommands = function(opts) {
+  var commands = [];
+  if (opts.hasOwnProperty('brightness')) {
+    commands.push('D' + opts.brightness);
+  }
+  if (opts.hasOwnProperty('flip')) {
+    if (opts.flip == 'horizontal') {
+      commands.push('RH');
+    }
+    if (opts.flip == 'vertical') {
+      commands.push('RV');
+    }
+  }
+  return commands.join('\n') + '\n';
 };
 
 var lineToCommand = function(items, y) {

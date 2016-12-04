@@ -28,3 +28,10 @@ This should expose this to functions in noder-red as:
 ```JavaScript
 context.global.xmasdojo
 ```
+
+To use it in a function in node-red output the results to a
+node-red-sense-hat node.
+
+```JavaScript
+context.global.xmasdojo.gridToCommand([['red','red']], {brightness: 0, flip: 'horizontal'});
+```

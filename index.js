@@ -6,9 +6,7 @@
  */
 'use strict';
 
-var XmasDojo = function() {}
-
-XmasDojo.prototype.arrayToCommand = function(array) {
+module.exports.gridToCommand = function(array) {
   var merged = [].concat.apply([], array.map(lineToCommand));
   return merged.join();
 };
@@ -20,6 +18,4 @@ var lineToCommand = function(items, y) {
     };
     return acc;
   }, []);
-}
-
-module.exports = XmasDojo;
+};

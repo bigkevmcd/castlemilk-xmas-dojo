@@ -6,7 +6,7 @@
  */
 'use strict';
 
-module.exports.gridToCommand = function(array, opts) {
+module.exports.gridToSenseLEDs = function(array, opts) {
   var opts = opts || {};
   var grid = [].concat.apply([], array.filter(function(row, index) {
     if (opts.hasOwnProperty('rows')) {
@@ -14,10 +14,21 @@ module.exports.gridToCommand = function(array, opts) {
     }
     return true;
   }).map(lineToCommand));
-  return (optsToCommands(opts) + grid.join()).trim();
+  return (optsToSenseLEDCommands(opts) + grid.join()).trim();
 };
 
-var optsToCommands = function(opts) {
+module.exports.gridToUnicornLEDs = function(array, opts) {
+  var opts = opts || {};
+  var grid = [].concat.apply([], array.filter(function(row, index) {
+    if (opts.hasOwnProperty('rows')) {
+      return index <= opts.rows;
+    }
+    return true;
+  }).map(lineToCommand));
+  return (optsToUnicornLEDCommands(opts) + grid.join()).trim();
+};
+
+var optsToSenseLEDCommands = function(opts) {
   var commands = [];
   if (opts.hasOwnProperty('brightness')) {
     commands.push('D' + opts.brightness);
@@ -29,6 +40,9 @@ var optsToCommands = function(opts) {
     if (opts.flip == 'vertical') {
       commands.push('RV');
     }
+  }
+  if (opts.hasOwnProperty('rotate')) {
+    commands.push('R'+opts.rotate);
   }
   return commands.join('\n') + '\n';
 };
